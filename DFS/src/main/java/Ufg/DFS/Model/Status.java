@@ -18,9 +18,9 @@ public class Status {
     private Integer id; 
     private String situacao;
 
-    @OneToOne
-    @JsonIgnore
-    private List <ManifestacaoIntencao> manifestacaoIntencao;
+   // @OneToOne
+    //@JsonIgnore
+    //private List <ManifestacaoIntencao> manifestacaoIntencao;
     
 
     public Status(){}

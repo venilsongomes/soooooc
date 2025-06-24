@@ -1,3 +1,4 @@
+
 package Ufg.DFS.Model;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,9 @@ public class NucleoConhecimento {
     private String nome;
     private String descricao;
 
-   //@OneToMany(mappedBy = "docente_id")
-   //@JsonBackReference
-   //private List<Docente> docentes;
+   @OneToMany(mappedBy = "nucleoConhecimento")
+   @JsonManagedReference
+   private List<Docente> docentes;
 
 
    @OneToMany(mappedBy = "nucleoConhecimento")

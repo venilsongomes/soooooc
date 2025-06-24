@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -26,7 +27,6 @@ public class Docente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String nome;
     private String email;
     private String telefone;
@@ -37,19 +37,19 @@ public class Docente {
     private  List<ManifestacaoIntencao> manifestacaoIntencaos;
 
 
-    //@JoinColumn(name = "nucleo_id")
-   ///@ManyToOne
-    //@JsonManagedReference
-    //private NucleoConhecimento nucleoConhecimento;
+    @JoinColumn(name = "Nucleo")
+    @ManyToOne
+    @JsonBackReference
+    private NucleoConhecimento nucleoConhecimento;
 
 
-    //public NucleoConhecimento getNucleoConhecimento() {
-     //   return nucleoConhecimento;
-   // }
+    public NucleoConhecimento getNucleoConhecimento() {
+        return nucleoConhecimento;
+    }
 
-    //public void setNucleoConhecimento(NucleoConhecimento nucleoConhecimento) {
-       // this.nucleoConhecimento = nucleoConhecimento;
-    //}
+    public void setNucleoConhecimento(NucleoConhecimento nucleoConhecimento) {
+       this.nucleoConhecimento = nucleoConhecimento;
+    }
 
     public List<ManifestacaoIntencao> getManifestacaoIntencaos() {
         return manifestacaoIntencaos;

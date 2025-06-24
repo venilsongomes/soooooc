@@ -3,20 +3,35 @@ import { useState, useEffect } from 'react'
 function Manifestacao(){
 
     const [manifestacaos, setManifestacao] = useState ([])
+    const [reload, setReload] = useState(false)
 
+ async function deleteManifestacao(id) {
+    try {
+      await fetch(`http://localhost:8080/manifestacao/${id}`, {
+        method: 'DELETE'
+      });
+      setReload(r => !r); // Atualiza a lista após deletar
+    } catch (err) {
+      console.error('Erro ao deletar manifestação:', err);
+    }
+  }
 
+    
  useEffect(() => {
   const  fetchData = async () => {
     try {
       const res = await fetch("http://localhost:8080/manifestacao");
       const data = await res.json();
       setManifestacao(data);
+      
     } catch (err) {
       console.error('Erro ao buscar manifestações:', err);
     }
   };
   fetchData();
-}, [manifestacaos]);
+}, [reload]);
+
+
 
 console.log(manifestacaos)
 
@@ -49,8 +64,15 @@ console.log(manifestacaos)
                   <span className="bg-green-500 text-white px-2 py-1 rounded">{manistar.status.situacao}</span>
                 </td>
                 <td className="p-3 text-center">
-                  <button className="text-gray-400 hover:text-red-500">🗑️</button>
-                </td>
+  <button
+    onClick={() => deleteManifestacao(manistar.id)}
+    className={`text-gray-400 hover:text-red-500 ${manistar.status.situacao === 'fechado' ? 'opacity-50 cursor-not-allowed' : ''}`}
+    disabled={manistar.status.situacao === 'fechado'}
+    title={manistar.status.situacao === 'fechado' ? 'Manifestação fechada' : 'Deletar'}
+  >
+    🗑️
+  </button>
+</td>
               </tr >
             
             )}
