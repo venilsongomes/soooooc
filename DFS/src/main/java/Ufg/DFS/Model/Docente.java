@@ -37,8 +37,8 @@ public class Docente {
     private  List<ManifestacaoIntencao> manifestacaoIntencaos;
 
 
-    ///@JoinColumn(name = "nucleo_id")
-///@ManyToOne
+    //@JoinColumn(name = "nucleo_id")
+   ///@ManyToOne
     //@JsonManagedReference
     //private NucleoConhecimento nucleoConhecimento;
 

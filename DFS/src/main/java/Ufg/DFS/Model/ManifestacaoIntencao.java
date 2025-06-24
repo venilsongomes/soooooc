@@ -30,12 +30,12 @@ public class ManifestacaoIntencao {
       @JsonManagedReference
       private Docente facilitador;
 
-      //public Docente getFacilitador() {
-       // return facilitador;
-   // }
-     // public void setFacilitador(Docente facilitador) {
-     //     this.facilitador = facilitador;
-      //}
+      public Docente getFacilitador() {
+        return facilitador;
+     }
+      public void setFacilitador(Docente facilitador) {
+          this.facilitador = facilitador;
+      }
 
       @JoinColumn(name = "nucleo_id")
       @ManyToOne 
