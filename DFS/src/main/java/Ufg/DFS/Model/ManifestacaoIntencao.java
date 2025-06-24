@@ -27,7 +27,6 @@ public class ManifestacaoIntencao {
       private Docente docente;
       
       @OneToOne
-      @JsonManagedReference
       private Docente facilitador;
 
       public Docente getFacilitador() {
@@ -59,7 +58,6 @@ public class ManifestacaoIntencao {
       private Date dataIngresso;
 
       @OneToOne
-      @JsonManagedReference
       private Status status;
 
      

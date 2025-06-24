@@ -1,4 +1,6 @@
 package Ufg.DFS.Model;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -18,7 +20,7 @@ public class Status {
 
     @OneToOne
     @JsonIgnore
-    private ManifestacaoIntencao manifestacaoIntencao;
+    private List <ManifestacaoIntencao> manifestacaoIntencao;
     
 
     public Status(){}

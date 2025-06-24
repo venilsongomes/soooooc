@@ -1,26 +1,26 @@
 import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import Manifestacao from './manifestacao';
 
 
 function App() {
-  const [manifestacoes, setManifestacoes] = useState([])
+  const [nucleo, setNucleo] = useState([])
 
-  useEffect(() => {
-  const fetchData = async () => {
+ useEffect(() => {
+  const  fetchData = async () => {
     try {
-      const res = await fetch("http://localhost:8080/status");
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const res = await fetch("http://localhost:8080/nucleo");
       const data = await res.json();
-      setManifestacoes(data);
+      setNucleo(data);
     } catch (err) {
-      console.error('Erro ao buscar manifestações:', err);
+      console.error('Erro ao buscar nucleo:', err);
     }
   };
   fetchData();
 }, []);
 
-console.log(manifestacoes)
+console.log(nucleo)
   return (
     <>
       <div className="flex h-screen">
@@ -45,45 +45,18 @@ console.log(manifestacoes)
           
             className="p-2 border rounded w-1/2"
           >
-            <option>Conceitos, Métodos e Técnicas de Computação</option>
-            <option>Engenharia de Software</option>
-            <option>Redes de Computadores</option>
+             {nucleo.map((nucleos) => (
+               <option key={nucleos.id} value={nucleos.id}>
+                {nucleos.nome}
+               </option>
+             )) 
+          }
+            
           </select>
           <button className="bg-[#083c55] text-white px-4 py-2 rounded">Manifestar Intenção</button>
         </div>
 
-        {/* Tabela */}
-        <table className="min-w-full bg-white shadow rounded">
-          <thead className="bg-gray-200 text-left">
-            <tr>
-              <th className="p-3">Nome</th>
-              <th className="p-3">Área</th>
-              <th className="p-3">Facilitador</th>
-              <th className="p-3">Docentes</th>
-              <th className="p-3">Status</th>
-              <th className="p-3">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-              <tr className="border-t">
-                <td className="p-3">NOME</td>
-                <td className="p-3">AREA</td>
-                <td className="p-3">FACILITADOR</td>
-                <td className="p-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="bg-blue-600 text-white px-2 py-1 rounded-full">DOCENTES</span>
-                  </div>
-                </td>
-                <td className="p-3">
-                  <span className="bg-green-500 text-white px-2 py-1 rounded">STATUS</span>
-                </td>
-                <td className="p-3 text-center">
-                  <button className="text-gray-400 hover:text-red-500">🗑️</button>
-                </td>
-              </tr>
-          </tbody>
-        </table>
+        <Manifestacao></Manifestacao>
 
         <div className="mt-6">
           <button className="border border-[#083c55] text-[#083c55] px-6 py-2 rounded hover:bg-[#e6f0f3]">Voltar</button>
