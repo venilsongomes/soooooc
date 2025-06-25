@@ -30,13 +30,13 @@ function Manifestacao(){
   };
   fetchData();
 }, [reload]);
-
+// Nenhum código adicional necessário aqui para indentação.
 
 
 console.log(manifestacaos)
 
-    return(<>
-    
+    return (
+      <>
         <table className="min-w-full bg-white shadow rounded">
           <thead className="bg-gray-200 text-left">
             <tr>
@@ -49,40 +49,55 @@ console.log(manifestacaos)
             </tr>
           </thead>
           <tbody>
-             { manifestacaos.map((manistar) => 
-              <tr key={manistar}>
-
+            {manifestacaos.map((manistar) => (
+              <tr key={manistar.id}>
                 <td className="p-3">{manistar.nucleoConhecimento.nome}</td>
-                <td className="p-3">{}</td>
+                <td className="p-3">{manistar.nucleoConhecimento.descricao}</td>
                 <td className="p-3">{manistar.facilitador.nome}</td>
                 <td className="p-3">
                   <div className="flex items-center space-x-2">
-                    <span className="bg-blue-600 text-white px-2 py-1 rounded-full">DOCENTES</span>
+                    <span className="bg-blue-600 text-white px-2 py-1 rounded-full">
+                      {manistar.nucleoConhecimento.docentes.length}
+                    </span>
                   </div>
                 </td>
                 <td className="p-3">
-                  <span className="bg-green-500 text-white px-2 py-1 rounded">{manistar.status.situacao}</span>
+                  <span className={`bg-green-500 text-white px-2 py-1 rounded 
+                     ${manistar.status.situacao === 'fechado'
+                      ? 'bg-red-500'
+                      : manistar.status.situacao === 'aceito'
+                      ? 'bg-sky-500'
+                      : manistar.status.situacao === 'aberto'
+                      ? 'bg-green-500'
+                      : 'bg-red-500' } `}>
+                    {manistar.status.situacao}
+                  </span>
                 </td>
                 <td className="p-3 text-center">
-  <button
-    onClick={() => deleteManifestacao(manistar.id)}
-    className={`text-gray-400 hover:text-red-500 ${manistar.status.situacao === 'fechado' ? 'opacity-50 cursor-not-allowed' : ''}`}
-    disabled={manistar.status.situacao === 'fechado'}
-    title={manistar.status.situacao === 'fechado' ? 'Manifestação fechada' : 'Deletar'}
-  >
-    🗑️
-  </button>
-</td>
-              </tr >
-            
-            )}
-              
-                
+                  <button
+                    onClick={() => deleteManifestacao(manistar.id)}
+                                  className={`px-2 py-1 rounded text-white
+                    ${
+                      manistar.status.situacao === 'aberto'
+                        ? 'bg-green-500 hover:bg-green-600'
+                        : 'bg-gray-400 cursor-not-allowed'
+                    }`}
+                  disabled={manistar.status.situacao !== 'aberto'}
+                  title={
+                    manistar.status.situacao !== 'aberto'
+                      ? 'Só é possível excluir manifestações com status ABERTO'
+                      : 'Deletar'
+                  }
+                                >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
-    
-
-    </>)
+      </>
+    )
 }
 
 export default Manifestacao;

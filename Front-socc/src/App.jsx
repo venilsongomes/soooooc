@@ -6,6 +6,7 @@ import Manifestacao from './manifestacao';
 
 function App() {
   const [nucleo, setNucleo] = useState([])
+  const [selectedNucleo, setSelectedNucleo] = useState('');
 
  useEffect(() => {
   const  fetchData = async () => {
@@ -20,13 +21,40 @@ function App() {
   fetchData();
 }, []);
 
-console.log(nucleo)
+const handleManifestarIntencao = async () => {
+  if (!selectedNucleo) {
+    alert('Selecione um núcleo!');
+    return;
+  }
+  try {
+    await fetch('http://localhost:8080/manifestacao', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nucleoConhecimento: { id: Number(selectedNucleo) },
+        facilitador: { id: 1 },
+        status: { id: 1 } 
+
+        
+      }),
+    });
+    alert('Manifestação enviada!');
+    // Aqui você pode atualizar a lista ou limpar o campo, se quiser
+  } catch (err) {
+    alert('Erro ao manifestar intenção');
+    console.error(err);
+  }
+};
+
+
+
+console.log(selectedNucleo)
   return (
     <>
       <div className="flex h-screen">
       {/* Menu lateral */}
       <aside className="w-64 bg-[#083c55] text-white p-4 space-y-4">
-        <h1 className="text-2xl font-bold mb-4">SGTC</h1>
+        <h1 className="text-2xl font-bold mb-4">SOOC</h1>
         <nav className="space-y-2">
           <a href="#" className="block hover:underline">Página Inicial</a>
           <a href="#" className="block hover:underline">Núcleos de Conhecimento</a>
@@ -42,9 +70,14 @@ console.log(nucleo)
         {/* Dropdown + botão */}
         <div className="flex items-center gap-4 mb-6">
           <select
+          className="p-2 border rounded w-1/2"
+          value={selectedNucleo}
+          onChange={e => setSelectedNucleo(e.target.value)}
           
-            className="p-2 border rounded w-1/2"
+        
           >
+            <option> Selecione Um núcleo</option>
+
              {nucleo.map((nucleos) => (
                <option key={nucleos.id} value={nucleos.id}>
                 {nucleos.nome}
@@ -53,7 +86,7 @@ console.log(nucleo)
           }
             
           </select>
-          <button className="bg-[#083c55] text-white px-4 py-2 rounded">Manifestar Intenção</button>
+          <button className="bg-[#083c55] text-white px-4 py-2 rounded" onClick={handleManifestarIntencao}>Manifestar Intenção</button>
         </div>
 
         <Manifestacao></Manifestacao>
