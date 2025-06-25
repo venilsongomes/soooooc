@@ -7,7 +7,7 @@ function Manifestacao(){
 
  async function deleteManifestacao(id) {
     try {
-      await fetch(`http://localhost:8080/manifestacao/${id}`, {
+      await fetch("http://localhost:8080/manifestacao/1", {
         method: 'DELETE'
       });
       setReload(r => !r); // Atualiza a lista após deletar
@@ -30,8 +30,6 @@ function Manifestacao(){
   };
   fetchData();
 }, [reload]);
-// Nenhum código adicional necessário aqui para indentação.
-
 
 console.log(manifestacaos)
 
@@ -51,13 +49,13 @@ console.log(manifestacaos)
           <tbody>
             {manifestacaos.map((manistar) => (
               <tr key={manistar.id}>
-                <td className="p-3">{}</td>
-                <td className="p-3">{}</td>
-                <td className="p-3">{}</td>
+                <td className="p-3">{manistar.nucleoConhecimento.nome}</td>
+                <td className="p-3">Java Script</td>
+                <td className="p-3">{manistar.facilitador.nome}</td>
                 <td className="p-3">
                   <div className="flex items-center space-x-2">
                     <span className="bg-blue-600 text-white px-2 py-1 rounded-full">
-                      {}
+                      {manistar.nucleoConhecimento.docentes.length}
                     </span>
                   </div>
                 </td>

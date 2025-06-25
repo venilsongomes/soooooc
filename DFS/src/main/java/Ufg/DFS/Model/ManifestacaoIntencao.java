@@ -37,7 +37,7 @@ public class ManifestacaoIntencao {
 
         @ManyToOne
         @JoinColumn(name = "nucleo_id")
-        @JsonBackReference("nucleo-manifestacao")
+        @JsonManagedReference("nucleo-manifestacao")
         private NucleoConhecimento nucleoConhecimento;
 
      public NucleoConhecimento getNucleoConhecimento() {

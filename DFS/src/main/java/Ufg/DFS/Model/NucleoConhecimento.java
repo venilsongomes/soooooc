@@ -31,7 +31,7 @@ public class NucleoConhecimento {
 
 
    @OneToMany(mappedBy = "nucleoConhecimento")
-   @JsonManagedReference("nucleo-manifestacao")
+   @JsonBackReference("nucleo-manifestacao")
    private List<ManifestacaoIntencao> manifestacaoIntencaos;
 
    @OneToOne
