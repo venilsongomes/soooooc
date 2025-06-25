@@ -51,13 +51,13 @@ console.log(manifestacaos)
           <tbody>
             {manifestacaos.map((manistar) => (
               <tr key={manistar.id}>
-                <td className="p-3">{manistar.nucleoConhecimento.nome}</td>
-                <td className="p-3">{manistar.nucleoConhecimento.descricao}</td>
-                <td className="p-3">{manistar.facilitador.nome}</td>
+                <td className="p-3">{}</td>
+                <td className="p-3">{}</td>
+                <td className="p-3">{}</td>
                 <td className="p-3">
                   <div className="flex items-center space-x-2">
                     <span className="bg-blue-600 text-white px-2 py-1 rounded-full">
-                      {manistar.nucleoConhecimento.docentes.length}
+                      {}
                     </span>
                   </div>
                 </td>

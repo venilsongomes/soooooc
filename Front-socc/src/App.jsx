@@ -7,6 +7,10 @@ import Manifestacao from './manifestacao';
 function App() {
   const [nucleo, setNucleo] = useState([])
   const [selectedNucleo, setSelectedNucleo] = useState('');
+ const [reloadManifestacoes, setReloadManifestacoes] = useState(false);
+
+ var idUser = 1;
+
 
  useEffect(() => {
   const  fetchData = async () => {
@@ -19,6 +23,8 @@ function App() {
     }
   };
   fetchData();
+  
+
 }, []);
 
 const handleManifestarIntencao = async () => {
@@ -26,29 +32,32 @@ const handleManifestarIntencao = async () => {
     alert('Selecione um núcleo!');
     return;
   }
+
   try {
     await fetch('http://localhost:8080/manifestacao', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+
+
       body: JSON.stringify({
+        docente:{ id: idUser},
         nucleoConhecimento: { id: Number(selectedNucleo) },
-        facilitador: { id: 1 },
         status: { id: 1 } 
 
         
       }),
     });
     alert('Manifestação enviada!');
-    // Aqui você pode atualizar a lista ou limpar o campo, se quiser
+     setReloadManifestacoes(r => !r);
   } catch (err) {
     alert('Erro ao manifestar intenção');
     console.error(err);
   }
 };
+<Manifestacao reload={reloadManifestacoes}/>
 
 
 
-console.log(selectedNucleo)
   return (
     <>
       <div className="flex h-screen">

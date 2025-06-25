@@ -23,7 +23,6 @@ public class ManifestacaoIntencao {
 
       @JoinColumn(name = "docente_id")
       @ManyToOne 
-      @JsonBackReference
       private Docente docente;
       
       @OneToOne
@@ -36,10 +35,10 @@ public class ManifestacaoIntencao {
           this.facilitador = facilitador;
       }
 
-      @JoinColumn(name = "nucleo_id")
-      @ManyToOne 
-      @JsonManagedReference
-      private NucleoConhecimento nucleoConhecimento;
+        @ManyToOne
+        @JoinColumn(name = "nucleo_id")
+        @JsonBackReference("nucleo-manifestacao")
+        private NucleoConhecimento nucleoConhecimento;
 
      public NucleoConhecimento getNucleoConhecimento() {
         return nucleoConhecimento;
@@ -57,8 +56,9 @@ public class ManifestacaoIntencao {
       private Date dataManifestacaoIntencao;
       private Date dataIngresso;
 
-      @OneToOne
-      private Status status;
+      @ManyToOne
+     @JoinColumn(name = "status_id")
+     private Status status;
 
      
         public Status getStatus() {

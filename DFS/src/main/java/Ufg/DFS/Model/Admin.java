@@ -11,8 +11,8 @@ public class Admin extends Docente {
         super();
     }
 
-    public Admin(Integer id, String nome, String email, String senha,  String telefone, Date ultimoAcesso) {
-        super(nome, email,  telefone, ultimoAcesso);
+    public Admin(Integer id, String senha) {
+        super();
         this.senha = senha;
         
     }

@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -25,28 +26,36 @@ public class NucleoConhecimento {
     private String descricao;
 
    @OneToMany(mappedBy = "nucleoConhecimento")
-   @JsonManagedReference
+   @JsonManagedReference("nucleo-docente")
    private List<Docente> docentes;
 
 
    @OneToMany(mappedBy = "nucleoConhecimento")
-   @JsonBackReference
+   @JsonManagedReference("nucleo-manifestacao")
    private List<ManifestacaoIntencao> manifestacaoIntencaos;
 
-
-
-   public List<ManifestacaoIntencao> getManifestacaoIntencaos() {
+   @OneToOne
+   @JsonManagedReference("nucleo-facilitador")
+   private Docente facilitador;
+ 
+  public Docente getFacilitador() {
+    return facilitador;
+}
+   public void setFacilitador(Docente facilitador) {
+    this.facilitador = facilitador;
+   }
+  public List<ManifestacaoIntencao> getManifestacaoIntencaos() {
     return manifestacaoIntencaos;
 }
-   public void setManifestacaoIntencaos(List<ManifestacaoIntencao> manifestacaoIntencaos) {
+public void setManifestacaoIntencaos(List<ManifestacaoIntencao> manifestacaoIntencaos) {
     this.manifestacaoIntencaos = manifestacaoIntencaos;
+}
+    public List<Docente> getDocentes() {
+    return docentes;
+}
+   public void setDocentes(List<Docente> docentes) {
+    this.docentes = docentes;
    }
-    // public List<Docente> getDocentes() {
-   // return docentes;
-//}
-  // public void setDocentes(List<Docente> docentes) {
-  //  this.docentes = docentes;
-   //}
     public NucleoConhecimento() {
         super();
     }

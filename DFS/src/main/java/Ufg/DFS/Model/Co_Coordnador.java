@@ -7,8 +7,8 @@ public class Co_Coordnador extends Docente {
 
     private String senha;
 
-    public Co_Coordnador(String nome, String email, String telefone, String senha, Date ultimoAcesso) {
-        super(nome, email, telefone, ultimoAcesso);
+    public Co_Coordnador(String nome,  String senha) {
+        super();
         this.senha = senha;
     }
      public Co_Coordnador() {

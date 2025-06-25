@@ -28,18 +28,10 @@ public class Docente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nome;
-    private String email;
-    private String telefone;
-    private Date ultimoAcesso;
-    
-    @OneToMany(mappedBy = "docente")
-    @JsonBackReference
-    private  List<ManifestacaoIntencao> manifestacaoIntencaos;
-
 
     @JoinColumn(name = "Nucleo")
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference("nucleo-docente")
     private NucleoConhecimento nucleoConhecimento;
 
 
@@ -50,23 +42,16 @@ public class Docente {
     public void setNucleoConhecimento(NucleoConhecimento nucleoConhecimento) {
        this.nucleoConhecimento = nucleoConhecimento;
     }
-
-    public List<ManifestacaoIntencao> getManifestacaoIntencaos() {
-        return manifestacaoIntencaos;
-    }
-
-    public void setManifestacaoIntencaos(List<ManifestacaoIntencao> manifestacaoIntencaos) {
-        this.manifestacaoIntencaos = manifestacaoIntencaos;
-    }
+     @OneToOne
+     @JsonBackReference("nucleo-facilitador")
+     private NucleoConhecimento facilitador;
 
 
     public Docente() { }
 
-    public Docente(String nome, String email, String telefone, Date ultimoAcesso) {
+    public Docente(String nome) {
         this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.ultimoAcesso = ultimoAcesso;
+      
     }
 
     public Integer getId() { return id; }
@@ -75,14 +60,4 @@ public class Docente {
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-
-    public String getTelefone() { return telefone; }
-    public void setTelefone(String telefone) { this.telefone = telefone; }
-
-    public Date getUltimoAcesso() { return ultimoAcesso; }
-    public void setUltimoAcesso(Date ultimoAcesso) { this.ultimoAcesso = ultimoAcesso; }
-
-    
 }
